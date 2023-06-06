@@ -72,7 +72,7 @@ async def confirm_booking(seat_id: str, action: str):
         redis_client.hmset(f"movie:{movie.id}", movie_data)
 
         # Save booking details and unlock the seat
-        booking = Booking(movie=movie.id, seat_id=seat_id)
+        booking = Booking(movie_id=movie.id, seat_id=seat_id)
         booking_key = f"booking:{seat_id}"
         redis_client.hmset(booking_key, booking.dict())
         unlock_seat(seat_id)
